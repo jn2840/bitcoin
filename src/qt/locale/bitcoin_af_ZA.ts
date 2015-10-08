@@ -139,8 +139,8 @@
         <translation>&amp;Opsies</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Beardcoin</source>
+        <translation>Beardcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -625,7 +625,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>beardcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Opsies:</translation>

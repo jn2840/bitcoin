@@ -187,8 +187,8 @@
         <translation>Промени &amp;лозинку...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Пошаљите новац на bitcoin адресу</translation>
+        <source>Send coins to a Beardcoin address</source>
+        <translation>Пошаљите новац на beardcoin адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -314,8 +314,8 @@
         <translation>верзија</translation>
     </message>
     <message>
-        <source>About Bitcoin Core</source>
-        <translation>O Bitcoin Coru</translation>
+        <source>About Beardcoin Core</source>
+        <translation>O Beardcoin Coru</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -733,7 +733,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>beardcoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcije</translation>

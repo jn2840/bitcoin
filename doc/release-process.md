@@ -2,41 +2,41 @@ Release Process
 ====================
 
 * update translations (ping wumpus, Diapolo or tcatm on IRC)
-* see https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex
+* see https://github.com/beardcoin/beardcoin/blob/master/doc/translation_process.md#syncing-with-transifex
 
 * * *
 
 ###first time only or for new builders, check out the source in the following directory hierarchy
 
 	cd /path/to/your/toplevel/build
-	git clone https://github.com/bitcoin/gitian.sigs.git
+	git clone https://github.com/beardcoin/gitian.sigs.git
 	git clone https://github.com/devrandom/gitian-builder.git
-	git clone https://github.com/bitcoin/bitcoin.git
+	git clone https://github.com/beardcoin/beardcoin.git
 
-###for bitcoin maintainers/release engineers, update (commit) version in sources
+###for beardcoin maintainers/release engineers, update (commit) version in sources
 
-	pushd ./bitcoin
+	pushd ./beardcoin
 	contrib/verifysfbinaries/verify.sh
 	doc/README*
 	share/setup.nsi
 	src/clientversion.h (change CLIENT_VERSION_IS_RELEASE to true)
 
-###for bitcoin maintainers/release engineers, tag version in git
+###for beardcoin maintainers/release engineers, tag version in git
 
 	git tag -s v(new version, e.g. 0.8.0)
 
-###for bitcoin maintainers/release engineers, write release notes. git shortlog helps a lot, for example:
+###for beardcoin maintainers/release engineers, write release notes. git shortlog helps a lot, for example:
 
 	git shortlog --no-merges v(current version, e.g. 0.7.2)..v(new version, e.g. 0.8.0)
 	popd
 
 * * *
 
-###update gitian, gitian.sigs, checkout bitcoin version, and perform gitian builds
+###update gitian, gitian.sigs, checkout beardcoin version, and perform gitian builds
 
- To ensure your gitian descriptors are accurate for direct reference for gbuild, below, run the following from a directory containing the bitcoin source:
+ To ensure your gitian descriptors are accurate for direct reference for gbuild, below, run the following from a directory containing the beardcoin source:
   
-	pushd ./bitcoin
+	pushd ./beardcoin
 	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=(new version, e.g. 0.8.0)
 	git checkout v${VERSION}
@@ -71,46 +71,46 @@ Release Process
 
 By default, gitian will fetch source files as needed. To cache them ahead of time:
 
-	make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../beardcoin/depends download SOURCES_PATH=`pwd`/cache/common
 
 Only missing files will be fetched, so this is safe to re-run for each build.
 
 Clone the detached-sigs repository:
 
 	popd
-	git clone https://github.com/bitcoin/bitcoin-detached-sigs.git
-	pushd ./bitcoin-builder
+	git clone https://github.com/beardcoin/beardcoin-detached-sigs.git
+	pushd ./beardcoin-builder
 
 NOTE: Offline builds must use the --url flag to ensure gitian fetches only from local URLs.
-For example: ./bin/bguild --url bitcoin=/path/to/bitcoin,signature=/path/to/sigs {rest of arguments}
+For example: ./bin/bguild --url beardcoin=/path/to/beardcoin,signature=/path/to/sigs {rest of arguments}
 The following gbuild invocations DO NOT DO THIS by default.
 
-###Build (and optionally verify) Bitcoin Core for Linux, Windows, and OS X:
+###Build (and optionally verify) Beardcoin Core for Linux, Windows, and OS X:
   
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	mv build/out/bitcoin-*.tar.gz build/out/src/bitcoin-*.tar.gz ../
+	./bin/gbuild --commit beardcoin=v${VERSION} ../beardcoin/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../beardcoin/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../beardcoin/contrib/gitian-descriptors/gitian-linux.yml
+	mv build/out/beardcoin-*.tar.gz build/out/src/beardcoin-*.tar.gz ../
 
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	mv build/out/bitcoin-*-win-unsigned.tar.gz inputs/bitcoin-win-unsigned.tar.gz
-	mv build/out/bitcoin-*.zip build/out/bitcoin-*.exe ../
+	./bin/gbuild --commit beardcoin=v${VERSION} ../beardcoin/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../beardcoin/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../beardcoin/contrib/gitian-descriptors/gitian-win.yml
+	mv build/out/beardcoin-*-win-unsigned.tar.gz inputs/beardcoin-win-unsigned.tar.gz
+	mv build/out/beardcoin-*.zip build/out/beardcoin-*.exe ../
 
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	mv build/out/bitcoin-*-osx-unsigned.tar.gz inputs/bitcoin-osx-unsigned.tar.gz
-	mv build/out/bitcoin-*.tar.gz build/out/bitcoin-*.dmg ../
+	./bin/gbuild --commit beardcoin=v${VERSION} ../beardcoin/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../beardcoin/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../beardcoin/contrib/gitian-descriptors/gitian-osx.yml
+	mv build/out/beardcoin-*-osx-unsigned.tar.gz inputs/beardcoin-osx-unsigned.tar.gz
+	mv build/out/beardcoin-*.tar.gz build/out/beardcoin-*.dmg ../
 	popd
 
   Build output expected:
 
-  1. source tarball (bitcoin-${VERSION}.tar.gz)
-  2. linux 32-bit and 64-bit dist tarballs (bitcoin-${VERSION}-linux[32|64].tar.gz)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (bitcoin-${VERSION}-win[32|64]-setup-unsigned.exe, bitcoin-${VERSION}-win[32|64].zip)
-  4. OSX unsigned installer and dist tarball (bitcoin-${VERSION}-osx-unsigned.dmg, bitcoin-${VERSION}-osx64.tar.gz)
+  1. source tarball (beardcoin-${VERSION}.tar.gz)
+  2. linux 32-bit and 64-bit dist tarballs (beardcoin-${VERSION}-linux[32|64].tar.gz)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (beardcoin-${VERSION}-win[32|64]-setup-unsigned.exe, beardcoin-${VERSION}-win[32|64].zip)
+  4. OSX unsigned installer and dist tarball (beardcoin-${VERSION}-osx-unsigned.dmg, beardcoin-${VERSION}-osx64.tar.gz)
   5. Gitian signatures (in gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your gitian key)/
 
 ###Next steps:
@@ -127,25 +127,25 @@ Commit your signature to gitian.sigs:
 
   Wait for Windows/OSX detached signatures:
 	Once the Windows/OSX builds each have 3 matching signatures, they will be signed with their respective release keys.
-	Detached signatures will then be committed to the bitcoin-detached-sigs repository, which can be combined with the unsigned apps to create signed binaries.
+	Detached signatures will then be committed to the beardcoin-detached-sigs repository, which can be combined with the unsigned apps to create signed binaries.
 
   Create (and optionally verify) the signed OSX binary:
 
 	pushd ./gitian-builder
-	./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	mv build/out/bitcoin-osx-signed.dmg ../bitcoin-${VERSION}-osx.dmg
+	./bin/gbuild -i --commit signature=v${VERSION} ../beardcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../beardcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../beardcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	mv build/out/beardcoin-osx-signed.dmg ../beardcoin-${VERSION}-osx.dmg
 	popd
 
   Create (and optionally verify) the signed Windows binaries:
 
 	pushd ./gitian-builder
-	./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	mv build/out/bitcoin-*win64-setup.exe ../bitcoin-${VERSION}-win64-setup.exe
-	mv build/out/bitcoin-*win32-setup.exe ../bitcoin-${VERSION}-win32-setup.exe
+	./bin/gbuild -i --commit signature=v${VERSION} ../beardcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../beardcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../beardcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	mv build/out/beardcoin-*win64-setup.exe ../beardcoin-${VERSION}-win64-setup.exe
+	mv build/out/beardcoin-*win32-setup.exe ../beardcoin-${VERSION}-win32-setup.exe
 	popd
 
 Commit your signature for the signed OSX/Windows binaries:
@@ -170,20 +170,20 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bitcoin.org server
-  into `/var/www/bin/bitcoin-core-${VERSION}`
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the beardcoin.org server
+  into `/var/www/bin/beardcoin-core-${VERSION}`
 
-- Update bitcoin.org version
+- Update beardcoin.org version
 
-  - First, check to see if the Bitcoin.org maintainers have prepared a
-    release: https://github.com/bitcoin/bitcoin.org/labels/Releases
+  - First, check to see if the Beardcoin.org maintainers have prepared a
+    release: https://github.com/beardcoin/beardcoin.org/labels/Releases
 
       - If they have, it will have previously failed their Travis CI
         checks because the final release files weren't uploaded.
         Trigger a Travis CI rebuild---if it passes, merge.
 
-  - If they have not prepared a release, follow the Bitcoin.org release
-    instructions: https://github.com/bitcoin/bitcoin.org#release-notes
+  - If they have not prepared a release, follow the Beardcoin.org release
+    instructions: https://github.com/beardcoin/beardcoin.org#release-notes
 
   - After the pull request is merged, the website will automatically show the newest version within 15 minutes, as well
     as update the OS download links. Ping @saivann/@harding (saivann/harding on Freenode) in case anything goes wrong
@@ -192,13 +192,13 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
   - Release sticky on bitcointalk: https://bitcointalk.org/index.php?board=1.0
 
-  - Bitcoin-development mailing list
+  - Beardcoin-development mailing list
 
-  - Update title of #bitcoin on Freenode IRC
+  - Update title of #beardcoin on Freenode IRC
 
-  - Optionally reddit /r/Bitcoin, ... but this will usually sort out itself
+  - Optionally reddit /r/Beardcoin, ... but this will usually sort out itself
 
-- Notify BlueMatt so that he can start building [https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin](the PPAs)
+- Notify BlueMatt so that he can start building [https://launchpad.net/~beardcoin/+archive/ubuntu/beardcoin](the PPAs)
 
 - Add release notes for the new version to the directory `doc/release-notes` in git master
 

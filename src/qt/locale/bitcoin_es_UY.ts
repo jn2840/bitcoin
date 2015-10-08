@@ -465,6 +465,6 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>beardcoin-core</name>
     </context>
 </TS>

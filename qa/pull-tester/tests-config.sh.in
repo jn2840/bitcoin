@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2013-2014 The Bitcoin Core developers
+# Copyright (c) 2013-2014 The Beardcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,5 +13,5 @@ EXEEXT="@EXEEXT@"
 @ENABLE_ZMQ_TRUE@ENABLE_ZMQ=1
 
 REAL_BITCOIND="$BUILDDIR/src/bitcoind${EXEEXT}"
-REAL_BITCOINCLI="$BUILDDIR/src/bitcoin-cli${EXEEXT}"
+REAL_BITCOINCLI="$BUILDDIR/src/beardcoin-cli${EXEEXT}"
 

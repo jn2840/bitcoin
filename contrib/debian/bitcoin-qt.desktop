@@ -1,12 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Bitcoin
-Comment=Bitcoin P2P Cryptocurrency
-Comment[fr]=Bitcoin, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Bitcoin, eşten eşe kriptografik sanal para birimi
-Exec=bitcoin-qt %u
+Name=Beardcoin
+Comment=Beardcoin P2P Cryptocurrency
+Comment[fr]=Beardcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Beardcoin, eşten eşe kriptografik sanal para birimi
+Exec=beardcoin-qt %u
 Terminal=false
 Type=Application
 Icon=bitcoin128
-MimeType=x-scheme-handler/bitcoin;
+MimeType=x-scheme-handler/beardcoin;
 Categories=Office;Finance;

@@ -1,4 +1,4 @@
-package org.bitcoin;
+package org.beardcoin;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

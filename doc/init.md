@@ -13,7 +13,7 @@ can be found in the contrib/init folder.
 1. Service User
 ---------------------------------
 
-All three startup configurations assume the existence of a "bitcoin" user
+All three startup configurations assume the existence of a "beardcoin" user
 and group.  They must be created before attempting to use these scripts.
 
 2. Configuration
@@ -43,7 +43,7 @@ This allows for running bitcoind without having to do any manual configuration.
 relative to the data directory. `wallet` *only* supports relative paths.
 
 For an example configuration file that describes the configuration settings, 
-see `contrib/debian/examples/bitcoin.conf`.
+see `contrib/debian/examples/beardcoin.conf`.
 
 3. Paths
 ---------------------------------
@@ -51,15 +51,15 @@ see `contrib/debian/examples/bitcoin.conf`.
 All three configurations assume several paths that might need to be adjusted.
 
 Binary:              `/usr/bin/bitcoind`  
-Configuration file:  `/etc/bitcoin/bitcoin.conf`  
+Configuration file:  `/etc/beardcoin/beardcoin.conf`
 Data directory:      `/var/lib/bitcoind`  
 PID file:            `/var/run/bitcoind/bitcoind.pid` (OpenRC and Upstart) or `/var/lib/bitcoind/bitcoind.pid` (systemd)  
 Lock file:           `/var/lock/subsys/bitcoind` (CentOS)  
 
 The configuration file, PID directory (if applicable) and data directory
-should all be owned by the bitcoin user and group.  It is advised for security
+should all be owned by the beardcoin user and group.  It is advised for security
 reasons to make the configuration file and data directory only readable by the
-bitcoin user and group.  Access to bitcoin-cli and other bitcoind rpc clients
+beardcoin user and group.  Access to beardcoin-cli and other bitcoind rpc clients
 can then be controlled by group membership.
 
 4. Installing Service Configuration

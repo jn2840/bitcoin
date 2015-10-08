@@ -107,7 +107,7 @@
         <translation>Құпия сөзді өзгерту</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
+        <source>Beardcoin</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -417,7 +417,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>beardcoin-core</name>
     <message>
         <source>Information</source>
         <translation>Информация</translation>

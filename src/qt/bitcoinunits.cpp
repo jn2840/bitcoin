@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Copyright (c) 2011-2013 The Beardcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTC);
+    unitlist.append(BDC);
     unitlist.append(mBTC);
     unitlist.append(uBTC);
     return unitlist;
@@ -27,7 +27,7 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTC:
+    case BDC:
     case mBTC:
     case uBTC:
         return true;
@@ -40,7 +40,7 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("BTC");
+    case BDC: return QString("BDC");
     case mBTC: return QString("mBTC");
     case uBTC: return QString::fromUtf8("μBTC");
     default: return QString("???");
@@ -51,7 +51,7 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Bitcoins");
+    case BDC: return QString("Bitcoins");
     case mBTC: return QString("Milli-Bitcoins (1 / 1" THIN_SP_UTF8 "000)");
     case uBTC: return QString("Micro-Bitcoins (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
@@ -62,7 +62,7 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC:  return 100000000;
+    case BDC:  return 100000000;
     case mBTC: return 100000;
     case uBTC: return 100;
     default:   return 100000000;
@@ -73,7 +73,7 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
+    case BDC: return 8;
     case mBTC: return 5;
     case uBTC: return 2;
     default: return 0;
